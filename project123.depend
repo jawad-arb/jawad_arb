@@ -1,0 +1,22 @@
+# depslib dependency file v1.0
+1670112254 source:c:\users\msi\documents\linkedlists\project123\main.c
+	<stdio.h>
+	<string.h>
+
+1670189225 source:c:\project123\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"employe.c"
+	"date.c"
+
+1670193804 c:\project123\employe.c
+	<stdio.h>
+	<stdlib.h>
+	"date.c"
+
+1670192028 c:\project123\date.c
+	<stdio.h>
+	<string.h>
+	<time.h>
+
