@@ -11,11 +11,10 @@
 #endif // DATE_H
 
 int choix,choix1,x;
-employe e;
 void menu(){
     printf("1--> gestion des employes\n");
     printf("2--> gestion des congees\n");
-    printf("3-->  consultation \n");
+    printf("3-->  consultation \n");//les demandes et son etat (accepter ou refuser)::
     printf("4--> quitter le programme \n");
     printf("votre choix:");
     scanf("%d",&choix);
@@ -27,7 +26,7 @@ void sous_menu(int choix){
         case 1 :{
             printf("1-->ajout un employe:\n");
             printf("2-->supprimer un employe :\n");
-            printf("3-->modifier un employe:\n");
+            printf("3-->afficher un employe:\n");
             printf("4-->retour\n");
             printf("5-->quitter le programme\n");
             printf("votre choix:");
@@ -35,6 +34,14 @@ void sous_menu(int choix){
             gere_employe(x);
         }
         case 2:{
+            printf("1-->ajout un demande:\n");
+            printf("2-->supprimer un demande :\n");
+            printf("3-->afficher mes demande:\n");
+            printf("4-->retour\n");
+            printf("5-->quitter le programme\n");
+            printf("votre choix:");
+            scanf("%d",&x);
+            gere_demande(x);
             printf("1-->ajout un demande:\n");
             printf("2-->supprimer un demande :\n");
             printf("3-->modifier un demande:\n");
@@ -68,16 +75,20 @@ void gere_employe(int x){
 
         }
          case 2 :{
-
+            suppEmp();
+            break;
          }
           case 3 :{
-
+            afficheEmp();
+            break;
           }
            case 4 :{
+               system("cls");
+               menu();
 
            }
             case 5 :{
-
+                break;
             }
 
 
@@ -87,6 +98,40 @@ void gere_employe(int x){
     }
 
 }
+
+void gere_demande(int x){
+
+    switch(x){
+        case 1 :{
+
+            break;
+
+        }
+         case 2 :{
+
+            break;
+         }
+          case 3 :{
+
+            break;
+          }
+           case 4 :{
+               system("cls");
+               menu();
+
+           }
+            case 5 :{
+                break;
+            }
+
+
+
+
+
+    }
+
+}
+
 
 
 
