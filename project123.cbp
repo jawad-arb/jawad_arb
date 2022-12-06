@@ -35,8 +35,15 @@
 			<Option compilerVar="CC" />
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
+		<Unit filename="demande.c">
+			<Option compilerVar="CC" />
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="employe.c">
 			<Option compilerVar="CC" />
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="employe.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="main.c">
