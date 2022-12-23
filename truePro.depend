@@ -1,0 +1,28 @@
+# depslib dependency file v1.0
+1671784268 source:c:\pro\truepro\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<math.h>
+	<time.h>
+	"employe.h"
+	"demande.h"
+	"absence.h"
+
+1671784453 c:\pro\truepro\employe.h
+	"date.h"
+
+1671738192 c:\pro\truepro\date.h
+	<time.h>
+
+1671791260 c:\pro\truepro\demande.h
+	"date.h"
+	"acces.h"
+
+1671710001 c:\pro\truepro\acces.h
+	<math.h>
+
+1671741518 c:\pro\truepro\absence.h
+	"date.h"
+	"acces.h"
+

@@ -1,145 +1,184 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-
-#ifndef EMPLOYE_H
-#include "employe.c"
-#endif // EMPLOYE_H
-
-#ifndef DATE_H
-#include "date.c"
-#endif // DATE_H
-
-int choix,choix1,x;
-void menu(){
-    printf("1--> gestion des employes\n");
-    printf("2--> gestion des congees\n");
-    printf("3-->  consultation \n");//les demandes et son etat (accepter ou refuser)::
-    printf("4--> quitter le programme \n");
-    printf("votre choix:");
-    scanf("%d",&choix);
-    sous_menu(choix);
-}
-
-void sous_menu(int choix){
-    switch(choix){
-        case 1 :{
-            printf("1-->ajout un employe:\n");
-            printf("2-->supprimer un employe :\n");
-            printf("3-->afficher un employe:\n");
-            printf("4-->retour\n");
-            printf("5-->quitter le programme\n");
-            printf("votre choix:");
-            scanf("%d",&x);
-            gere_employe(x);
-        }
-        case 2:{
-            printf("1-->ajout un demande:\n");
-            printf("2-->supprimer un demande :\n");
-            printf("3-->afficher mes demande:\n");
-            printf("4-->retour\n");
-            printf("5-->quitter le programme\n");
-            printf("votre choix:");
-            scanf("%d",&x);
-            gere_demande(x);
-            printf("1-->ajout un demande:\n");
-            printf("2-->supprimer un demande :\n");
-            printf("3-->modifier un demande:\n");
-            printf("4-->retour\n");
-            printf("5-->quitter le programme\n");
-            printf("4-->votre choix:");
-            scanf("%d",&x);
-            //gere_congee(x);
-        }
-        case 3:{
-            //afiche_congee();
-        }
-        case 4:{
-           printf("fin de programme \n");
-           return 0;
-        }
-
-
-    }
-
-}
-
-//gere les employe
-
-void gere_employe(int x){
-
-    switch(x){
-        case 1 :{
-            ajoutEmp();
-            break;
-
-        }
-         case 2 :{
-            suppEmp();
-            break;
-         }
-          case 3 :{
-            afficheEmp();
-            break;
-          }
-           case 4 :{
-               system("cls");
-               menu();
-
-           }
-            case 5 :{
-                break;
-            }
-
-
-
-
-
-    }
-
-}
-
-void gere_demande(int x){
-
-    switch(x){
-        case 1 :{
-
-            break;
-
-        }
-         case 2 :{
-
-            break;
-         }
-          case 3 :{
-
-            break;
-          }
-           case 4 :{
-               system("cls");
-               menu();
-
-           }
-            case 5 :{
-                break;
-            }
-
-
-
-
-
-    }
-
-}
-
-
-
+#include<math.h>
+#include<time.h>
+#include "employe.h"
+#include "demande.h"
+#include "absence.h"
 
 
 int main(){
+    int choix,x;
+    /** menu **/
+    printf("\n\n");
+    printf("\n-----------*********------------\n");
+    printf("\n-----------*********------------\n");
+    printf("    1-->> gestion des employes\n");
+    printf("    2-->> gestion des demande\n");
+    printf("    3-->> gestion des absences\n");
+    printf("    4-->> statistique\n");
+    printf("    5-->> quitter le programme \n");
+    printf("\n-----------*********------------\n");
+    printf("votre choix:");
+    scanf("%d",&choix);
+    system("cls");
 
-menu();
+    /** sous menu **/
+
+    switch(choix){
+        case 1 :{
+            printf("\n-----------*********------------\n");
+            printf("\n-----------*********------------\n");
+            printf("    1-->ajout un employe:\n");
+            printf("    2-->supprimer un employe :\n");
+            printf("    3-->afficher un employe:\n");
+            printf("    4-->retour\n");
+            printf("    5-->quitter le programme\n");
+            printf("\n-----------*********------------\n");
+            printf("votre choix:");
+            scanf("%d",&x);
+            //----------------------------------------------- gere employe
+            switch(x){
+        case 1 :
+
+            ajoutEmp();
+            break;
+            exit(0);
+
+         case 2 :
+            suppEmp();
+            break;
+            exit(0);
+
+          case 3 :
+            afficheEmp();
+            break;
+            exit(0);
+
+           case 4 :
+               system("cls");
+                exit(0);
+
+            case 5 :
+                exit(0);
 
 
-return 0;
-}
+        }
+        break;
+
+        }
+
+
+        case 2:{
+            printf("\n-----------*********------------\n");
+            printf("\n-----------*********------------\n");
+            printf("    1-->ajout un demande:\n");
+            printf("    2-->supprimer un demande :\n");
+            printf("    3-->afficher un demandes:\n");
+            printf("    4-->afficher tout mes demandes \n");
+            printf("    5-->quitter le programme\n");
+            printf("\n-----------*********------------\n");
+            printf("votre choix:");
+            scanf("%d",&x);
+             switch(x){
+        case 1 :{
+            ajoute_demande();
+            break;
+
+        }
+         case 2 :{
+            supp_demande();
+            break;
+         }
+          case 3 :{
+              affiche_demande();
+            break;
+          }
+           case 4 :{
+               //affiche_MesDemande();
+                break;
+           }
+            case 5 :{
+                break;
+            }
+
+    }
+            break;
+        }
+        case 3:{
+            printf("\n-----------*********------------\n");
+            printf("\n-----------*********------------\n");
+            printf("    1-->ajout un absence:\n");
+            printf("    2-->supprimer un absence :\n");
+            printf("    3--> affiche l'absence\n");
+            printf("    4-->afficher nombre des absences MALADIE:\n");
+            printf("    5-->afficher nombre des absences FORMATION:\n");
+            printf("    6-->afficher nombre des absences reunion:\n");
+            printf("    7-->quitter le programme\n");
+            printf("\n-----------*********------------\n");
+            printf("votre choix:");
+            scanf("%d",&x);
+
+            switch(x){
+                    case 1:{
+                        ajout_absence();
+                        break;
+
+                    }
+
+                case 2:{
+                        supp_absence();
+                        break;
+
+            }
+                case 3:{
+                        afficheAbsence();
+                            break;
+                    }
+                case 4:{
+                    printf("%d",afficheNbrAbsencemaladie());
+                        break;
+                }
+                case 5:{
+                    printf("%d",afficheNbrAbsenceformation());
+                    break;
+                }
+                case 6:{
+                    printf("%d",afficheNbrAbsencereunion());
+                    break;
+                }
+                case 7:{
+                    break;
+                }
+
+            }
+
+
+                        break;
+                    }
+
+
+                    case 4: {
+                        system("cls");
+                        printf("\n-----------*********------------\n");
+                        printf("\n-----------*********------------\n");
+                       printf("nombre des employes --->>> %d\n",getNbrEmploye());
+                       printf("nombre des congee   --->>> %d\n",getNbrCongee());
+                       printf("\n-----------*********------------\n");
+                       exit(0);
+                    }
+
+                    case 5: {
+                       printf("fin de programme \n");
+                       exit(0);
+                    }
+
+
+    }
+
+
+        return 0;
+    }
+
+
