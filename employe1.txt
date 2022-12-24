@@ -1,2 +1,3 @@
-3	s1234	arbahi	jawad	12345	12-12-2001
-2	s123	arbahi	jawad	123123	12-12-2001
+id        cin       nom            prenom         tele           date de naissance   salaire     
+1         s1        arbahi         jawad          12345          12/12/2001          12000       
+2         s123      arara          asdf           1234           12/12/2001          12120.00    

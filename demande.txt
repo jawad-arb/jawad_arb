@@ -1,1 +1,4 @@
-1	s12	asd	asdf	123	12-11-2000	12-12-2009	14-12-2009
+id_emp      id_demande          date deb        date fin        type_demande
+1           1                   12/12/2020      12/01/2020      payee       
+2           2                   13/12/2020      20/12/2020      non payee   
+3           3                   02/12/2020      07/12/2020      urgent      

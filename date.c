@@ -1,10 +1,7 @@
+#include <stdio.h>
+#include <time.h>
 
-#include<stdio.h>
-#include<string.h>
-#include<time.h>
-
-#define DATE_H 1
-
+#define _DATE_H 1
 
 #define SAMEDI_ID   6
 #define DIMANCHE_ID 0
@@ -13,37 +10,53 @@
 #define MIN_PER_HOUR 60
 #define HOUR_PER_DAY 24
 
+typedef struct date{
+          int jour;
+          int mois;
+          int annee;
+} Date;
+
 #define _DATE_H 1
 
-typedef struct {
-    int jour;
-    int mois;
-    int annee;
-}Date;
 
-//verifier si deux date sont equal
-
-int isEqualDate(Date d1 , Date d2){
-
-    return d1.annee==d2.annee && d1.mois==d2.mois && d1.jour==d2.jour ;
+int isEqualDate(Date d1, Date d2) {
+  return d1.annee == d2.annee && d1.mois == d2.mois && d1.jour == d2.jour;
 }
-//verifier si la date est correct
 
-int valideDate(Date date){
-    return (date.jour>0 && date.jour<=31)
-        &&(date.mois>0 && date.mois<=12)
-        &&(date.annee>1960);
+/**
+ * @brief Verifier si la date est vrai ou non
+ *
+ * @param date Date à verifier
+ * @return int
+ */
+int valideDate(Date date) {
+  return (date.jour > 0 && date.jour < 32)
+    && (date.mois > 0 && date.mois < 13)
+    && (date.annee > 1960);
 }
-//verifier si la date 1 est inferieur a la date 2 :
 
-int isGreaterThan(Date d1 , Date d2){
-    if(!valideDate(d1) || !valideDate(d2));
-        return 0;
-    return d1.annee<d2.annee ||(d1.annee==d2.annee && (d1.mois <d2.mois || (d1.mois==d2.annee && d1.jour < d2.jour)));
+/**
+ * @brief Verifier si la 1ere date est inferieur à la 2eme date.
+ *
+ * @param d1 1ere Date
+ * @param d2 2eme Date
+ * @return int Retourne 1 si (d1 < d2), 0 sinon
+ */
+int isGreaterThan(Date d1, Date d2) {
+  if (!valideDate(d1) || !valideDate(d2))
+    return 0;
+
+  return d1.annee < d2.annee || (d1.annee == d2.annee
+    && (d1.mois < d2.mois || (d1.mois == d2.mois && d1.jour < d2.jour)));
 }
-//Calculer le nombre de jours entre la date 1 et la date 2 (Date1 - Date2)
-//pour determiner nombre des jours entre deux de congees
 
+/**
+ * @brief Calculer le nombre de jours entre la date 1 et la date 2 (Date1 - Date2)
+ *
+ * @param d1 Date 1
+ * @param d2 Date 2
+ * @return int
+ */
 int getDiffDays(Date d1, Date d2) {
   if (isEqualDate(d1, d2))
     return 0;
@@ -69,16 +82,17 @@ int getDiffDays(Date d1, Date d2) {
   return difftime(mktime(&t1), mktime(&t2)) / (int) (SEC_PER_MIN * MIN_PER_HOUR * HOUR_PER_DAY);
 }
 
-//Saisir la date sous format (dd-mm-yy)
-
-
-
-Date saisirDate(){
-  Date date ;
-  do{
-    scanf("%d-%d-%d",&(date.jour),&(date.mois),&(date.annee));
-  }while(!valideDate(date));
-return date;
+/**
+ * @brief Saisir la date sous format (dd-mm-yy)
+ *
+ * @return Date
+ */
+Date saisirDate() {
+  Date date;
+  do {
+    scanf("%d-%d-%d", &(date.jour), &(date.mois), &(date.annee));
+  } while (!valideDate(date));
+  return date;
 }
 
 Date strToDate(char* sDate) {
@@ -86,36 +100,56 @@ Date strToDate(char* sDate) {
   sscanf(sDate, "%d-%d-%d", &(date.jour), &(date.mois), &(date.annee));
   return date;
 }
-//initialiser la date
 
-Date initDate(int j , int m , int a){
-    Date d;
-    d.jour=j;
-    d.mois=m;
-    d.annee=a;
-return d;
+/**
+ * @brief Initialiser la Date
+ *
+ * @param j jour (compris entre 1 et 31)
+ * @param m mois (compris entre 1 et 12)
+ * @param a annee
+ * @return Date
+ */
+Date initDate(int j, int m, int a) {
+  Date d;
+  d.jour = j;
+  d.mois = m;
+  d.annee = a;
+  return d;
 }
 
-//afficher la date sous la forme dd/mm/yy
+/**
+ * @brief Afficher la Date sous forme dd-mm-yy
+ *
+ * @param date
+ * @return int - Si la date n'est pas valide, retourne -1
+ */
+int printDate(Date date) {
+  if (!valideDate(date)) {
+    printf(" Date non valide !!! \n");
+    return -1;
+  }
 
-int printDate(Date date){
-    if(!valideDate(date)){
-        printf("la date est invalide\n");
-        return -1;
-        }
-
-    printf("%d-%d-%d",(date.jour),(date.mois),(date.annee));
-        return 1;
+  printf(" %d-%d-%d", date.jour, date.mois, date.annee);
+  return 1;
 }
-//date d'aujourd'hui
+
+/**
+ * @brief Date d'aujourd'hui
+ *
+ * @return Date
+ */
 Date today() {
   time_t t;
   t = time(&t);
   struct tm* c = gmtime(&t);
   return (Date) {c->tm_mday, c->tm_mon + 1, c->tm_year + 1900};
 }
-//Jour de la semaine, 0 � 6 (commen�ant par 0: dimanche)
 
+/**
+ * @brief Jour de la semaine, 0 à 6 (commençant par 0: dimanche)
+ *
+ * @return int
+ */
 int getWeekDay(Date d) {
   struct tm t1;
 
@@ -130,19 +164,36 @@ int getWeekDay(Date d) {
 
   return t1.tm_wday;
 }
-//Verifier si l'annee est une annee bissextile
 
+/**
+ * @brief Verifier si l'annee est une annee bissextile
+ *
+ * @param year L'annee à verifier
+ * @return int
+ */
 int isLeapYear(int year) {
   return (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0));
 }
-//Nombre de jour par mois
+
+/**
+ * @brief Nombre de jour par mois
+ *
+ * @param d Date
+ * @return int
+ */
 int daysPerMonth(Date d) {
   if (d.mois == 2)
     return isLeapYear(d.annee) ? 28 : 29;
   int days[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
   return *(days + d.mois - 1);
 }
-//Calculer le nombre de jours entre 2 Dates, similaire � getDiffDays(Date, Date)
+
+/**
+ * @brief Calculer le nombre de jours entre 2 Dates, similaire à getDiffDays(Date, Date)
+ * @param d1 1ere Date
+ * @param d2 2eme Date
+ * @return int
+ */
 int getDays(Date d1, Date d2) {
   if (isEqualDate(d1, d2))
     return 0;
@@ -166,11 +217,28 @@ int getDays(Date d1, Date d2) {
   }
   return -1;
 }
-//Verifier si une date est comprise entre 2 dates (d1 <= d < d2)
+
+/**
+ * @brief Verifier si une date est comprise entre 2 dates (d1 <= d < d2)
+ *
+ * @param d
+ * @param d1
+ * @param d2
+ * @return int
+ */
 int isBetween2Dates(Date d, Date d1, Date d2) {
   return (isGreaterThan(d1, d) || isEqualDate(d1, d)) && isGreaterThan(d, d2);
 }
-//Calculer l'intersection de 2 intervalles [debut, fin] et [d1, d2]
+
+/**
+ * @brief Calculer l'intersection de 2 intervalles [debut, fin] et [d1, d2]
+ *
+ * @param d1 D2
+ * @param d2 D2
+ * @param debut Debut
+ * @param fin Fin
+ * @return Si une des dates est invalide, -1 est retourne
+ */
 int getIntersection(Date d1, Date d2, Date debut, Date fin) {
   if (isGreaterThan(d2, d1) || isGreaterThan(fin, debut))
     return -1;
@@ -189,4 +257,36 @@ int getIntersection(Date d1, Date d2, Date debut, Date fin) {
       ? getDays(d1, d2)
       : getDays(d1, fin);
   }
+}
+
+
+int comparer_dates_(Date d1, Date d2){
+    if (d2.annee < d1.annee)
+       return 0;
+    else if (d2.annee > d1.annee)
+       return 1;
+    if (d2.annee == d1.annee)
+    {
+        if (d2.mois<d1.mois)
+            return 0;
+        else if (d2.mois>d1.mois)
+            return 1;
+        else if (d2.jour<d1.jour)
+            return 0;
+        else if(d2.jour>d1.jour)
+            return 1;
+        else
+            return 1;
+    }
+}
+
+
+
+int estEntre(Date debut, Date m, Date fin){
+    return comparer_dates_(debut,m)&&comparer_dates_(m,fin);
+}
+
+//intersection =ensemble vide   =>  return 0
+int intersection(Date d1, Date d2, Date d3, Date d4){
+    return estEntre(d1,d3,d2) || estEntre(d1,d4,d2) || estEntre(d3,d1,d4) ;
 }

@@ -1,0 +1,5 @@
+id        nom          prenom        age           date de naissance       
+1         arbahi       jawad         21            12/12/2001              
+2         arbib        adil          21            1/1/2001                
+3         achahbar     oussama       21            13/1/2001               
+
